@@ -1,0 +1,19 @@
+os: linux
+dist: bionic
+arch: ppc64le
+sudo: required
+language: go
+
+go: "1.15.x"
+
+install:
+  - sudo apt update
+  - sudo apt-get install -y make git gcc build-essential pkgconf libtool libsystemd-dev libcap-dev libseccomp-dev libyajl-dev go-md2man libtool autoconf python3 automake
+
+script:
+  - git clone https://github.com/containers/crun.git
+  - cd crun
+  - ./autogen.sh
+  - ./configure
+  - make
+  - ./crun --version
